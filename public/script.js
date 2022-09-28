@@ -1,4 +1,4 @@
-const socket = io("/");
+onst socket = io("/");
 
 var peer = new Peer(undefined, {
     path: "/peerjs",
@@ -10,20 +10,26 @@ const user = prompt("Enter your name");
 
 const myVideo = document.createElement("video");
 myVideo.muted = true;
+
 let myStream;
 
-navigator.mediaDevices.getUserMedia({audio: true, video: true}).then((stream)=>{
-    myStream = stream;
-    addVideoStream(myVideo, stream);
-})
+navigator.mediaDevices
+    .getUserMedia({
+        audio: true,
+        video: true,
+    })
+    .then((stream) => {
+        myStream = stream;
+        addVideoStream(myVideo, stream);
+    })
 
-function addVideoStream(video, stream){
+function addVideoStream(video, stream) {
     video.srcObject = stream;
-    video.addEventListener("loadedmetadata", ()=>{
+    video.addEventListener("loadedmetadata", () => {
         video.play();
         $("#video_grid").append(video)
     });
-}
+};
 
 $(function () {
     $("#show_chat").click(function () {
